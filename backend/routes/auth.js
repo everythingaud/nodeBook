@@ -1,20 +1,52 @@
-// Authorization and Passport related routes
+// All Passport-related auth routes here
 const express = require('express');
 const router = express.Router();
-const { User } = require('./models');
-const hashPassword = require('./hashPassword');
+const  { User } = require('../models/models');
+const hashPassword = require('../helper/passwordHash');
 
-// auth is a function that takes passport as an argument
-// when called in server.js, auth will run passport and authenticate the user
+// export auth as a function that takes passport as an argument and,
+// when called in server.js, runs passport authentication on the user
 var auth = (passport) => {
 
-  // warning - empty route
-  router.get('/', (req, res) => {
-    res.status(500).send("Should be on login page");
+  // GET Login page
+  router.get('/', function(req, res) {
+    // res.render('login');
+    res.send({message: "Should be on login page"});
   });
 
-  // POST - registration
-  // creates and saves user to mongo, redirects to login upon success
+  // POST Login page
+  router.post('/login', passport.authenticate('local'), (req, res) => {
+    res.json({id: req.session.passport.user});
+  });
+
+  // GET Logged-In verification
+  // This is called upon componentDidMount on Document Portal page after successful user login
+  // and helps us verify that a user is still logged in.
+  router.get('/user/logged-in', (req, res) => {
+    res.json({user: req.user});
+  });
+
+  // GET user ID
+  // Called within the same componentDidMount on Document Portal page and is
+  // used to pass down the user id as a prop to NewDocModal for creating new documents
+  router.get('/userID', (req, res) => {
+    res.json({id: req.session.passport.user});
+  });
+
+  // GET Logout
+  // Ends the session and redirects to login
+  router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
+
+  // // GET registration page
+  // router.get('/register', (req, res) => {
+  //   res.render('signup');
+  // });
+
+// POST registration
+// Creates and saves new user in database, redirects to /login upon success
   router.post('/register', (req, res) => {
     const password = hashPassword(req.body.password);
 
@@ -26,43 +58,17 @@ var auth = (passport) => {
     });
 
     newUser.save()
-      .then(user => {
-        res.send({ success: true });
-        res.redirect('/login');
-      })
-      .catch(err => {
-        console.log(err);
-        res.send("Error registering, please try again");
-        res.redirect('/register');
-      });
-  });
-
-  // POST - login page
-  // send back user session id
-  router.post('/login', passport.authenticate('local'), (req, res) => {
-    res.json({id: req.session.passport.user });
-  });
-
-  // GET - login verification
-  // verify that user is logged in, sends back user object
-  router.get('/user/logged-in', (req, res) => {
-    res.json({ user: req.user });
-  });
-
-  // GET - user id
-  // sends back user id
-  router.get('/userId', (req, res) => {
-    res.json({ id: req.session.passport.user });
-  });
-
-  // GET - logout
-  router.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+    .then((user)=>{
+      res.send({success: true});
+      res.redirect('/login');
+    })
+    .catch((err)=>{
+      console.log(err);
+      res.status(500).redirect('/register');
+    });
   });
 
   return router;
 };
 
-// export routes as a function
 module.exports = auth;

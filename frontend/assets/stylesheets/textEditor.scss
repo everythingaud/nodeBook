@@ -1,0 +1,57 @@
+@import "colors";
+
+.editorRoot {
+  background: $white;
+  // border: 1px solid $gray;
+  font-size: 14px;
+  // padding: 20px;
+  margin: 0;
+  width: 100%;
+}
+.toolbar {
+  border-top: 1px solid $gray;
+  border-left: 1px solid $gray;
+  border-right: 1px solid $gray;
+  background-color: $rose;
+  border-radius: 2px;
+}
+.editor {
+  cursor: text;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.textarea {
+  border: 1px solid $gray;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
+  overflow-y: auto;
+  height: 500px;
+}
+.toolbar-selector {
+  display: inline-block !important;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 30px;
+  font-size: 15px;
+  width: 32.5%;
+}
+.toolbar-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.history-buttons {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-highlight {
+  background-color: $blue;
+}
+.save, .history {
+  margin: 0 10px;
+}

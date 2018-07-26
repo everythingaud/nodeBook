@@ -1,0 +1,30 @@
+@import "colors";
+
+.toolLine {
+  display: flex;
+  justify-content: space-between;
+}
+.styleButton {
+  background-color: $gray_white;
+  color: $pink;
+  cursor: pointer;
+  margin: 5px 18px;
+  padding: 2px 0;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  width: 35px;
+  height: 35px;
+}
+.button {
+  display: inline-block;
+}
+.styleButton:hover{
+  border: 1px solid $blue;
+}
+.activeButton {
+  background-color: $blue;
+}

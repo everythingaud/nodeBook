@@ -1,7 +1,28 @@
-# NodeBook
-An electron based collaborative text editor.
+# Nodebook
 
-## About
-Quickly accessing and editing documents are important for highly collaborative teams. Unfortunately, most collaborative text editors, such as Google Docs and the like, are limited to browsers. As users start to need more and more browser tabs, but tabs take up a lot of memory and even powerful computers quickly slow down. There is a real opportunity to reduce the clicks and time needed to access, edit and share documents when compared to today’s web-based alternatives. On the other hand, other desktop based apps such as Evernote and iNotes lack the real-time/collaborative nature of something like Google Docs.
+Nodebook is a collaborative text editor desktop (Electron) app. With Nodebook, users can register and log in to create, edit, and share documents with others. Text editing is made easy and local to users' laptops.
 
-This is where NodeBook comes in. NodeBook is a collaborative rich-text editing desktop application where users can create, view, edit and share documents through NodeBook.
+## Creating a new document
+After login, a user can create a new document by clicking on the "+" on the top right corner on the landing page. They have to give the document a name and a password for verification. Upon creation, the document is given a shareable ID (for collaborating purposes). It also contains the time, date, and owner of the document.
+
+<img src="/frontend/public/img/nodebook_create_new.gif"/>
+
+## Editing a document
+Basic text editing features are incorporated within this app (including fonts, colors, sizes, inline styles, and block styles). All changes made to a file can be saved so that when the user logs into another session, the changes made previously are still preserved.
+
+<img src="/frontend/public/img/nodebook_edit.gif"/>
+
+## Collaborate with others
+To collaborate on a document, a user can enter the shareable ID and the document's password. If a document with such credentials is found, it will appear under the "Shared documents" section. When multiple users share a document, all users can see each other's edits in real time.
+
+<img src="/frontend/public/img/nodebook_collaborate.gif"/>
+
+## Inline search
+Inline search is incorporated so that a user can easily find any instance of the search term. Found instances are highlighted in blue for visibility.
+
+<img src="/frontend/public/img/nodebook_inline_search.gif"/>
+
+## Search for files
+On the navigation bar, a user can search for files (both their own documents and shared documents) whose titles match the search term.
+
+<img src="/frontend/public/img/nodebook_search_file.gif"/>
